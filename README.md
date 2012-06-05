@@ -58,6 +58,7 @@ To remove the following block just type:
 ```
 
 - If you want to _not_ remove `console` statments:
+
 ```shell
     groundskeeper -c false -i file.js -o output.js
 ```

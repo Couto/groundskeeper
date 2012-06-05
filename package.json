@@ -1,0 +1,30 @@
+{
+  "name": "groundskeeper",
+  "description": "Pragmas and console statements remover",
+  "version": "0.0.1",
+  "author": "Luis Couto <couto@15minuteslate.net> (15minuteslate.net)",
+
+  "repository": {
+    "type": "git",
+    "url" : ""
+  },
+
+  "bin": {
+    "groundskeeper": "./bin/groundskeeper"
+  },
+
+  "dependencies": {
+    "commander": "0.6.x",
+    "colors": "0.6.x",
+    "log.js": "git://github.com/Couto/log.js.git"
+  },
+
+  "devDependencies": {
+    "mocha" : "*",
+    "should": "*"
+  }
+
+  "engines": {
+    "node": ">=0.6"
+  }
+}

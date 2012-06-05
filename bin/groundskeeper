@@ -1,0 +1,109 @@
+#!/usr/bin/env node
+
+/**
+ * groundskeeper
+ *
+ * A small utility to remove declared pragmas and console declarations from
+ * string files
+ * Please see: http://upload.wikimedia.org/wikipedia/en/d/dc/GroundskeeperWillie.png
+ *
+ * @author Luis Couto
+ * @organization 15minuteslate.net
+ * @contact couto@15minuteslate.net
+ * @version 0.0.1
+ * @requires path, fs, exec, commander.js, colors, log.js
+ * @license http://couto.mit-license.org MIT
+ *
+ *
+ * @example
+ * $ groundskeeper -vct -p validation,development -i ./src -o ./dist
+ */
+
+// Dependencies
+var program = require('commander'),
+    colors = require('colors'),
+    log = require('../lib/log'),
+    groundskeeper = require('../'),
+    // Variables
+    options = {},
+    time;
+
+// Options
+// .option(-shortcut, --name, "description", functionToParse, defaultValue)
+program
+    .version("0.0.1")
+    .usage(' -i <path> -o <path> -c [true] -p validation,test,development')
+    .option('-i, --input <path>',       'file or folder to clean up, '+'defaults to current folder'.grey, './')
+    .option('-o, --output <path>',      'output destination, '+'defaults to ./clean'.grey, './clean')
+    .option('-c, --console [boolean]',  'enable the removal of console statements', false)
+    .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, '+'defaults to validation, development'.grey, 'validation, development')
+    .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
+    .option('-t, --time [boolean]',     'output overall duration time', false)
+    .option('--list',                   'display list of console methods that will be removed');
+
+program.name = 'pragmas';
+
+// --list
+program.on('list', function () {
+    console.log();
+    console.log('   assert '.bold + '            console.assert(undefined === true)'.grey);
+    console.log('   count '.bold + '             console.count("hard loop")'.grey);
+    console.log('   debug '.bold + '             console.debug(String)'.grey);
+    console.log('   dir '.bold + '               console.dir(Object)'.grey);
+    console.log('   dirxml '.bold + '            console.dirxml(document.body)'.grey);
+    console.log('   error '.bold + '             console.error("Argument not given")'.grey);
+    console.log('   group '.bold + '             console.group("groupName")'.grey);
+    console.log('   groupCollapsed '.bold + '    console.groupCollapsed("collapsedGroupName")'.grey);
+    console.log('   groupEnd '.bold + '          console.groupEnd("groupName")'.grey);
+    console.log('   info '.bold + '              console.info(variableName)'.grey);
+    console.log('   log '.bold + '               console.log()'.grey);
+    console.log('   markTimeline '.bold + '      console.markTimeline("string")'.grey);
+    console.log('   profile '.bold + '           console.profile("profileName")'.grey);
+    console.log('   profileEnd '.bold + '        console.profileEnd("profileName")'.grey);
+    console.log('   time '.bold + '              console.time("forEach loop")'.grey);
+    console.log('   timeEnd '.bold + '           console.timeEnd("forEach loop")'.grey);
+    console.log('   trace '.bold + '             console.trace()'.grey);
+    console.log('   warn '.bold + '              console.warn("exception found")'.grey);
+    console.log();
+    process.exit();
+});
+
+program.parse(process.argv);
+
+// --input
+if (program.input) {
+    options.input = program.input;
+    log.info('defined input source as %s', options.input);
+}
+
+// --output
+if (program.output) {
+    options.output = program.output;
+    log.info('defined output source as %s', options.output);
+}
+
+// --pragmas
+if (program.pragmas) {
+    options.pragmas = [].concat(program.pragmas.split(/ *, */));
+    log.info('defined pragmas as %s', program.pragmas);
+}
+
+// --console
+if (program.console) {
+    options.console = program.console;
+    log.info('defined pragmas as %s', options.pragmas);
+}
+
+// --verbose
+if (program.verbose) {
+    options.verbose = program.verbose;
+    log.level = 8;
+    log.info('defined verbose as %s', options.verbose);
+}
+
+// --time
+if (program.time) {
+    time = +new Date();
+    options.time = program.time;
+    log.info('defined display of time as %s', options.time);
+}

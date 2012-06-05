@@ -6,7 +6,7 @@
 
   "repository": {
     "type": "git",
-    "url" : ""
+    "url" : "https://github.com/Couto/groundskeeper"
   },
 
   "bin": {
@@ -21,8 +21,9 @@
 
   "devDependencies": {
     "mocha" : "*",
-    "should": "*"
-  }
+    "should": "*",
+    "cdir": "*"
+  },
 
   "engines": {
     "node": ">=0.6"

@@ -23,22 +23,20 @@
 var program = require('commander'),
     colors = require('colors'),
     log = require('../lib/log'),
-    groundskeeper = require('../'),
+    groundskeeper = require('../').groundskeeper,
     // Variables
-    options = {},
-    time;
+    options = {};
 
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
     .version("0.0.1")
     .usage(' -i <path> -o <path> -c [true] -p validation,test,development')
-    .option('-i, --input <path>',       'file or folder to clean up, '+'defaults to current folder'.grey, './')
-    .option('-o, --output <path>',      'output destination, '+'defaults to ./clean'.grey, './clean')
+    .option('-i, --input <path>',       'input folder, ' + 'defaults to current folder'.grey, './')
+    .option('-o, --output <path>',      'output folder, ' + 'defaults to ./clean'.grey, './clean')
     .option('-c, --console [boolean]',  'enable the removal of console statements', false)
-    .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, '+'defaults to validation, development'.grey, 'validation, development')
+    .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
-    .option('-t, --time [boolean]',     'output overall duration time', false)
     .option('--list',                   'display list of console methods that will be removed');
 
 program.name = 'pragmas';
@@ -101,9 +99,4 @@ if (program.verbose) {
     log.info('defined verbose as %s', options.verbose);
 }
 
-// --time
-if (program.time) {
-    time = +new Date();
-    options.time = program.time;
-    log.info('defined display of time as %s', options.time);
-}
+groundskeeper(options);

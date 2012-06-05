@@ -31,10 +31,10 @@ var program = require('commander'),
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
     .version("0.0.1")
-    .usage(' -i <path> -o <path> -c [true] -p validation,test,development')
-    .option('-i, --input <path>',       'input folder, ' + 'defaults to current folder'.grey, './')
-    .option('-o, --output <path>',      'output folder, ' + 'defaults to ./clean'.grey, './clean')
-    .option('-c, --console [boolean]',  'enable the removal of console statements', false)
+    .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
+    .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
+    .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')
+    .option('-c, --console [boolean]',  'enable the removal of console statements', true)
     .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
     .option('--list',                   'display list of console methods that will be removed');
@@ -72,12 +72,16 @@ program.parse(process.argv);
 if (program.input) {
     options.input = program.input;
     log.info('defined input source as %s', options.input);
+} else {
+    return console.log(program.helpInformation());
 }
 
 // --output
 if (program.output) {
     options.output = program.output;
     log.info('defined output source as %s', options.output);
+} else {
+    return console.log(program.helpInformation());
 }
 
 // --pragmas

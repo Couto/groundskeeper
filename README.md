@@ -30,10 +30,10 @@ Usage
 
 Altough several options can be given, example:
 
-    - To remove specific blocks of code, just insert comments specifying which block do you want to remove. Those comments must resemble the xml/html tags. By default all blocks named `validation` and `development` are removed.
+- To remove specific blocks of code, just insert comments specifying which block do you want to remove. Those comments must resemble the xml/html tags. By default all blocks named `validation` and `development` are removed.
 
-    ```javascript
-        function merge(target, source) {
+```javascript
+    function merge(target, source) {
         var k;
 
         //<validation>
@@ -50,17 +50,17 @@ Altough several options can be given, example:
 
         return target;
     }
-    ```
+```
 
-    To remove the following block just type:
-    ```shell
-        groundskeeper -p validation -i file.js -o output.js
-    ```
+To remove the following block just type:
+```shell
+    groundskeeper -p validation -i file.js -o output.js
+```
 
-    - If you want to _not_ remove `console` statments:
-    ```shell
-        groundskeeper -c false -i file.js -o output.js
-    ```
+- If you want to _not_ remove `console` statments:
+```shell
+    groundskeeper -c false -i file.js -o output.js
+```
 
 
 Options

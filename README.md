@@ -18,14 +18,14 @@ Instalation
 The easiest way is to use [npm](https://github.com/isaacs/npm)
 
 ```shell
-    npm install groundskeeper -g
+npm install groundskeeper -g
 ```
 
 Usage
 -----
 
 ```shell
-    groundskeeper [options] -i <input folder> -o <output folder>
+groundskeeper [options] -i <input folder> -o <output folder>
 ```
 
 Altough several options can be given, example:
@@ -33,34 +33,34 @@ Altough several options can be given, example:
 - To remove specific blocks of code, just insert comments specifying which block do you want to remove. Those comments must resemble the xml/html tags. By default all blocks named `validation` and `development` are removed.
 
 ```javascript
-    function merge(target, source) {
-        var k;
+function merge(target, source) {
+    var k;
 
-        //<validation>
-        if (!is.object(target) || !is.object(source)) {
-            throw new Error('Argument given must be of type Object');
-        }
-        //</validation>
-
-        for (k in source) {
-            if (source.hasOwnProperty(k) && !target[k]) {
-                target[k] = source[k];
-            }
-        }
-
-        return target;
+    //<validation>
+    if (!is.object(target) || !is.object(source)) {
+        throw new Error('Argument given must be of type Object');
     }
+    //</validation>
+
+    for (k in source) {
+        if (source.hasOwnProperty(k) && !target[k]) {
+            target[k] = source[k];
+        }
+    }
+
+    return target;
+}
 ```
 
 To remove the following block just type:
 ```shell
-    groundskeeper -p validation -i file.js -o output.js
+groundskeeper -p validation -i file.js -o output.js
 ```
 
 - If you want to _not_ remove `console` statments:
 
 ```shell
-    groundskeeper -c false -i file.js -o output.js
+groundskeeper -c false -i file.js -o output.js
 ```
 
 
@@ -68,15 +68,31 @@ Options
 -------
 
 ```
-    -h, --help               output usage information
-    -V, --version            output the version number
-    -i, --input <path>       input folder, defaults to current folder
-    -o, --output <path>      output folder, defaults to ./clean
-    -c, --console [boolean]  enable the removal of console statements
-    -p, --pragmas <names>    comma-delimited <names> to remove, defaults to validation, development
-    -v, --verbose [boolean]  outputs current state of procedure
-    --list                   display list of console methods that will be removed
+-h, --help               output usage information
+-V, --version            output the version number
+-i, --input <path>       input folder, defaults to current folder
+-o, --output <path>      output folder, defaults to ./clean
+-c, --console [boolean]  enable the removal of console statements
+-p, --pragmas <names>    comma-delimited <names> to remove, defaults to validation, development
+-v, --verbose [boolean]  outputs current state of procedure
+--list                   display list of console methods that will be removed
 ```
+
+Tests
+-----
+Tests are ran using [mocha](http://visionmedia.github.com/mocha/) and [jscoverage](https://github.com/visionmedia/node-jscoverage) you can install mocha with `npm install`, but you'll need to clone and install jscoverage from this [repository](https://github.com/visionmedia/node-jscoverage)
+
+To issue the tests, take a look at the [Makefile](https://github.com/Couto/groundskeeper/blob/master/Makefile), but in short, it's just a matter of doing:
+
+```shell
+make test
+```
+
+If you want to see the code coverage, just write:
+```shell
+make lib-cov && make test-cov
+```
+
 
 License
 -------

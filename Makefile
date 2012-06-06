@@ -8,6 +8,7 @@ test:
 		$(TESTS)
 
 test-cov:
+	@$(MAKE) lib-cov
 	@NODE_ENV=COVERAGE ./node_modules/.bin/mocha \
 		--ui exports \
 		--reporter html-cov \
@@ -15,7 +16,7 @@ test-cov:
 		&& open ./coverage/index.html
 
 lib-cov:
-	@rm -rf coverage
+	@rm -rf coverage/*
 	@jscoverage lib coverage
 
 .PHONY: lib-cov test test-cov

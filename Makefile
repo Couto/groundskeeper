@@ -1,10 +1,16 @@
 TESTS = test/*.test.js
-REPORTER = list
 
 test:
 	@NODE_ENV=TESTS ./node_modules/.bin/mocha \
 		--ui exports \
-		--reporter $(REPORTER) \
+		--reporter list \
+		$(TESTS)
+
+test-watch:
+	@NODE_ENV=TESTS ./node_modules/.bin/mocha \
+		--ui exports \
+		--watch \
+		--reporter min \
 		$(TESTS)
 
 test-cov:

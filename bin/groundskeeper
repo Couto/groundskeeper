@@ -30,7 +30,7 @@ var program = require('commander'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.0.2")
+    .version("0.0.3")
     .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
     .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
     .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')

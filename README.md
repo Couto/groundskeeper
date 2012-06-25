@@ -93,6 +93,9 @@ If you want to see the code coverage, just write:
 make lib-cov && make test-cov
 ```
 
+TODO
+----
+ * Finish tests
 
 License
 -------

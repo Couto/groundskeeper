@@ -12,7 +12,7 @@ var load = function (file) {
     should = require('should'),
     fs = require('fs'),
     path = require('path'),
-    cdir = require('cdir');
+    exists = fs.exists || path.exists; // node v.0.8.0 or v.0.6.X
 
 function fixture(name, fn) {
     fs.readFile(__dirname + '/fixtures/' + name + '.js', 'utf8', fn);
@@ -27,25 +27,25 @@ module.exports = {
         '.removeConsole() should remove all consoles': function (done) {
 
             fixture('console', function (err, data) {
-                var data = groundskeeper.removeConsole(data);
-                data.indexOf('console').should.equal(-1);
-                done()
+                var content = groundskeeper.removeConsole(data);
+                content.indexOf('console').should.equal(-1);
+                done();
             });
         },
 
         '.removeConsole() should remove all consoles from minified code': function (done) {
             fixture('console.min', function (err, data) {
-                var data = groundskeeper.removeConsole(data);
-                data.indexOf('console').should.equal(-1);
+                var content = groundskeeper.removeConsole(data);
+                content.indexOf('console').should.equal(-1);
                 done();
             });
         },
 
         '.removePragmas() should remove all pragmas': function (done) {
             fixture('pragma', function (err, data) {
-                var data = groundskeeper.removePragma(data, { pragmas: ['validation', 'optional']});
-                data.indexOf('Array.prototype').should.equal(-1);
-                data.indexOf('Object.keys').should.equal(-1);
+                var content = groundskeeper.removePragma(data, { pragmas: ['validation', 'optional']});
+                content.indexOf('Array.prototype').should.equal(-1);
+                content.indexOf('Object.keys').should.equal(-1);
                 done();
             });
         }
@@ -54,7 +54,7 @@ module.exports = {
     'utils' : {
         '.mkdir() should create successive folders' : function (done) {
             utils.mkdir('./test/testFolder1/testFolder12/testFolder13', function () {
-                path.exists('./test/testFolder1/testFolder12/testFolder13', function (exist) {
+                exists('./test/testFolder1/testFolder12/testFolder13', function (exist) {
                     if (exist) {
                         done();
                     } else {
@@ -66,18 +66,15 @@ module.exports = {
 
         '.rm() should remove empty folders' : function (done) {
             utils.rm('./test/testFolder1/testFolder12/testFolder13', function () {
-                path.exists('./test/testFolder1/testFolder12/testFolder13', function (exists) {
-                    if (exists) {
-                        throw new Error();
-                    } else {
-                        done();
-                    }
+                exists('./test/testFolder1/testFolder12/testFolder13', function (exist) {
+                    if (!exist) { done(); }
                 });
             });
         },
 
         '.rm() should throw error on non-empty folders': function (done) {
             utils.rm('./test/testFolder1', function () {
+
                 done();
             });
         }

@@ -16,7 +16,7 @@
   "dependencies": {
     "commander": "0.6.x",
     "colors": "0.6.x",
-    "log.js": "git://github.com/Couto/log.js.git"
+    "log.js": "https://github.com/Couto/log.js/tarball/master"
   },
 
   "devDependencies": {

@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.0.1
+ * @version 0.0.5
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -30,7 +30,7 @@ var program = require('commander'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.0.3")
+    .version("0.0.5")
     .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
     .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
     .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')

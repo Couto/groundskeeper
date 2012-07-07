@@ -1,4 +1,6 @@
 TESTS = test/*.test.js
+JSFILES = bin/* lib/*.js
+JSONFILES = package.json
 
 test:
 	@NODE_ENV=TESTS ./node_modules/.bin/mocha \
@@ -24,5 +26,8 @@ test-cov:
 lib-cov:
 	@rm -rf coverage/*
 	@jscoverage lib coverage
+
+version:
+	@sed -i '' 's/$(OLD_VERSION)/$(NEW_VERSION)/g' $$i $(shell ls $(JSFILES)) $(shell ls $(JSONFILES))
 
 .PHONY: lib-cov test test-cov

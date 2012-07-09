@@ -35,7 +35,7 @@ program
     .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
     .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')
     .option('-c, --console [boolean]',  'enable the removal of console statements', true)
-    .option('-a, --ast [boolean]',      'should use ast. Safer but removes newlines', true)
+    .option('-a, --ast [boolean]',      'disable parse through ast, fallbacks to regex but keeps newlines', true)
     .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
     .option('--list',                   'display list of console methods that will be removed');

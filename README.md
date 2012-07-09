@@ -73,6 +73,8 @@ Options
 -i, --input <path>       input folder, defaults to current folder
 -o, --output <path>      output folder, defaults to ./clean
 -c, --console [boolean]  enable the removal of console statements
+-a, --ast [boolean]      disable parse through ast, fallbacks to regex but keeps
+newlines
 -p, --pragmas <names>    comma-delimited <names> to remove, defaults to validation, development
 -v, --verbose [boolean]  outputs current state of procedure
 --list                   display list of console methods that will be removed

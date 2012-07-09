@@ -21,12 +21,24 @@ The easiest way is to use [npm](https://github.com/isaacs/npm)
 npm install groundskeeper -g
 ```
 
+Notes
+-----
+
+ * If you minify your code (and you should!). Please use this before the minification process since it will __unminify__ your code on the process.
+
+
 Usage
 -----
 
 ```shell
 groundskeeper [options] -i <input folder> -o <output folder>
 ```
+
+```javascript
+var groundskeeper = require('groundskeeper').groundskeeper(options);
+```
+
+I'm not really sure if the second way is useful, but it exists just in case.
 
 Altough several options can be given, example:
 

@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.0.5
+ * @version 0.0.6
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -30,11 +30,12 @@ var program = require('commander'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.0.5")
+    .version("0.0.6")
     .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
     .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
     .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')
     .option('-c, --console [boolean]',  'enable the removal of console statements', true)
+    .option('-a, --ast [boolean]',      'should use ast. Safer but removes newlines', true)
     .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
     .option('--list',                   'display list of console methods that will be removed');
@@ -68,6 +69,13 @@ program.on('list', function () {
 
 program.parse(process.argv);
 
+// --verbose
+if (program.verbose) {
+    options.verbose = program.verbose;
+    log.level = 8;
+    log.info('defined verbose as %s', options.verbose);
+}
+
 // --input
 if (program.input) {
     options.input = program.input;
@@ -93,14 +101,13 @@ if (program.pragmas) {
 // --console
 if (program.console) {
     options.console = program.console;
-    log.info('defined pragmas as %s', options.pragmas);
+    log.info('defined to remove console as %s', options.console);
 }
 
-// --verbose
-if (program.verbose) {
-    options.verbose = program.verbose;
-    log.level = 8;
-    log.info('defined verbose as %s', options.verbose);
+// --ast
+if (program.ast) {
+    options.ast = program.ast;
+    log.info('defined to use ast method: %s', options.ast);
 }
 
 groundskeeper(options);

@@ -1,7 +1,7 @@
 {
   "name": "groundskeeper",
   "description": "Pragmas and console statements remover",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Luis Couto <couto@15minuteslate.net> (15minuteslate.net)",
 
   "repository": {
@@ -16,7 +16,8 @@
   "dependencies": {
     "commander": "0.6.x",
     "colors": "0.6.x",
-    "log.js": "https://github.com/Couto/log.js/tarball/master"
+    "log.js": "https://github.com/Couto/log.js/tarball/master",
+    "burrito": "0.2.12"
   },
 
   "devDependencies": {

@@ -23,6 +23,7 @@
   "devDependencies": {
     "mocha" : "*",
     "should": "*",
+    "uglify-js": "*",
     "cdir": "*"
   },
 

@@ -3,9 +3,10 @@ JSFILES = bin/* lib/*.js
 JSONFILES = package.json
 
 test:
+	@clear
 	@NODE_ENV=TESTS ./node_modules/.bin/mocha \
 		--ui exports \
-		--reporter list \
+		--reporter nyan \
 		$(TESTS)
 
 test-watch:

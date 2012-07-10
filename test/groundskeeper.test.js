@@ -89,11 +89,8 @@ module.exports = {
         '.mkdir() should create successive folders' : function (done) {
             utils.mkdir('./test/testFolder1/testFolder12/testFolder13', function () {
                 exists('./test/testFolder1/testFolder12/testFolder13', function (exist) {
-                    if (exist) {
-                        done();
-                    } else {
-                        throw new Error();
-                    }
+                    exist.should.be.true;
+                    done();
                 });
             });
         },
@@ -101,7 +98,8 @@ module.exports = {
         '.rm() should remove empty folders' : function (done) {
             utils.rm('./test/testFolder1/testFolder12/testFolder13', function () {
                 exists('./test/testFolder1/testFolder12/testFolder13', function (exist) {
-                    if (!exist) { done(); }
+                    exist.should.be.false;
+                    done();
                 });
             });
         }

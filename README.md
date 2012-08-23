@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/Couto/groundskeeper.png)](http://travis-ci.org/Couto/groundskeeper)
 groundskeeper
 =============
 

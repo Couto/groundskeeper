@@ -1,4 +1,13 @@
-module.exports = require('./lib/groundskeeper');
+module.exports = function (options) {
+    'use strict';
+
+    // Dependencies
+    var Groundskeeper = require('./lib/groundskeeper'),
+        fs = require('fs'),
+        glob = require('glob');
+
+
+};
 
 /**
  *                              `,:,`

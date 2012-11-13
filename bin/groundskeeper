@@ -16,14 +16,13 @@
  *
  *
  * @example
- * $ groundskeeper -vct -p validation,development -i ./src -o ./dist
+ * $ groundskeeper -d true -n App.logger -p validation,development -i ./src -o ./dist
  */
 
 // Dependencies
 var program = require('commander'),
     colors = require('colors'),
-    log = require('../lib/log'),
-    groundskeeper = require('../').groundskeeper,
+    groundskeeper = require('../index'),
     // Variables
     options = {};
 
@@ -32,20 +31,22 @@ var program = require('commander'),
 program
     .version("0.0.6")
     .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
-    .option('-i, --input <path>',       'input folder, ' + 'folder to read files')
-    .option('-o, --output <path>',      'output folder, ' + 'folder where cleaned files will be placed')
-    .option('-c, --console [boolean]',  'enable the removal of console statements', true)
-    .option('-a, --ast [boolean]',      'disable parse through ast, fallbacks to regex but keeps newlines', true)
+    .option('-i, --input <path>',       'input folder, ' + 'folder or glob to read files' + ' defaults to stdin'.grey)
+    .option('-o, --output <path>',      'output folder, ' + 'folder/file where cleaned files will be placed ' + 'defaults to stdout'.grey)
     .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
+    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger` ' + 'defaults to `console`'.grey) 
+    .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
+    .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
     .option('--list',                   'display list of console methods that will be removed');
 
-program.name = 'pragmas';
+program.name = 'groundskeeper';
 
 // --list
 program.on('list', function () {
     console.log();
     console.log('   assert '.bold + '            console.assert(undefined === true)'.grey);
+    console.log('   clear '.bold + '             console.clear()'.grey);
     console.log('   count '.bold + '             console.count("hard loop")'.grey);
     console.log('   debug '.bold + '             console.debug(String)'.grey);
     console.log('   dir '.bold + '               console.dir(Object)'.grey);
@@ -69,45 +70,9 @@ program.on('list', function () {
 
 program.parse(process.argv);
 
-// --verbose
-if (program.verbose) {
-    options.verbose = program.verbose;
-    log.level = 8;
-    log.info('defined verbose as %s', options.verbose);
-}
-
-// --input
-if (program.input) {
-    options.input = program.input;
-    log.info('defined input source as %s', options.input);
-} else {
-    return console.log(program.helpInformation());
-}
-
-// --output
-if (program.output) {
-    options.output = program.output;
-    log.info('defined output source as %s', options.output);
-} else {
-    return console.log(program.helpInformation());
-}
-
 // --pragmas
 if (program.pragmas) {
-    options.pragmas = [].concat(program.pragmas.split(/ *, */));
-    log.info('defined pragmas as %s', program.pragmas);
+    program.pragmas = [].concat(program.pragmas.split(/ *, */));
 }
 
-// --console
-if (program.console) {
-    options.console = program.console;
-    log.info('defined to remove console as %s', options.console);
-}
-
-// --ast
-if (program.ast) {
-    options.ast = program.ast;
-    log.info('defined to use ast method: %s', options.ast);
-}
-
-groundskeeper(options);
+groundskeeper(program);

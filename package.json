@@ -3,30 +3,25 @@
   "description": "Pragmas and console statements remover",
   "version": "0.0.6",
   "author": "Luis Couto <couto@15minuteslate.net> (15minuteslate.net)",
-
   "repository": {
     "type": "git",
-    "url" : "https://github.com/Couto/groundskeeper"
+    "url": "https://github.com/Couto/groundskeeper"
   },
-
   "bin": {
     "groundskeeper": "./bin/groundskeeper"
   },
-
   "dependencies": {
-    "commander": "0.6.x",
-    "colors": "0.6.x",
-    "log.js": "https://github.com/Couto/log.js/tarball/master",
-    "burrito": "0.2.12"
+    "falafel": "~0.1.4",
+    "colors": "~0.6.0-1",
+    "commander": "~1.0.5",
+    "winston": "~0.6.2",
+    "glob": "~3.1.14"
   },
-
   "devDependencies": {
-    "mocha" : "*",
-    "should": "*",
-    "uglify-js": "*",
-    "cdir": "*"
+    "should": "~1.2.1",
+    "cdir": "~0.1.2",
+    "mocha": "~1.7.0"
   },
-
   "engines": {
     "node": ">=0.8"
   }

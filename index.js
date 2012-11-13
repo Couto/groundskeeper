@@ -1,11 +1,29 @@
+/*jshint node:true*/
+
 module.exports = function (options) {
     'use strict';
 
     // Dependencies
     var Groundskeeper = require('./lib/groundskeeper'),
         fs = require('fs'),
-        glob = require('glob');
+        glob = require('glob'),
 
+        input = fs.createReadStream(options.input),
+        cleaner = new Groundskeeper(options),
+        data = '',
+        counter = 0;
+
+    input.setEncoding('utf8');
+
+    input.on('data', function (chunk) {
+        data += chunk;
+        console.log(counter += 1);
+    });
+
+    input.on('end', function () {
+        console.log('end')
+        cleaner.pipe(process.stdout);
+    });
 
 };
 

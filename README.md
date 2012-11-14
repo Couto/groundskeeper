@@ -1,6 +1,8 @@
 groundskeeper
 =============
 
+__Current Version:__ 0.1.0
+
 This is a small utility to remove forgotten `consoles` and specific blocks of code from Javascript files.
 
 It just happens that I forget __a lot__ to remove `console` statements when moving code to production... at the same time I like to do a lot of validations while in development enviroment, validations that are not really needed when in production mode.
@@ -18,79 +20,108 @@ Instalation
 The easiest way is to use [npm](https://github.com/isaacs/npm)
 
 ```shell
-npm install groundskeeper -g
+    npm install groundskeeper -g
 ```
-
-Notes
------
-
- * If you minify your code (and you should!). Please use this before the minification process since it will __unminify__ your code on the process.
-
 
 Usage
 -----
 
+Pretty simple... dirty file goes in, clean file goes out:
+
 ```shell
-groundskeeper [options] -i <input folder> -o <output folder>
+    groundskeeper < dirty.js > clean.js
 ```
 
 ```javascript
-var groundskeeper = require('groundskeeper').groundskeeper(options);
+    var fs = require('fs'),
+        groundskeeper = require('groundskeeper'),
+        file = fs.readFileSync('dirtyFile.js', 'utf8'),
+        cleaner = groundskeeper(options);
+
+    cleaner.write(file);
+    fs.writeFileSync('cleanFile.js', cleaner.isString(), 'utf8');
+
 ```
 
-I'm not really sure if the second way is useful, but it exists just in case.
-
-Altough several options can be given, example:
-
-- To remove specific blocks of code, just insert comments specifying which block do you want to remove. Those comments must resemble the xml/html tags. By default all blocks named `validation` and `development` are removed.
+Streams are supported by groundskeeper, but not by [esprima](http://code.google.com/p/esprima/issues/detail?id=92&q=Enhancement), if you really want to use Streams, make sure that your files are below 40960 bytes... still the example:
 
 ```javascript
-function merge(target, source) {
-    var k;
+    var fs = require('fs'),
+        groundskeeper = require('groundskeeper'),
+        dirty = fs.createReadStream('dirty.js'),
+        clean = fs.createWriteStream('clean.js'),
+        cleaner = groundskeeper(options),
 
-    //<validation>
-    if (!is.object(target) || !is.object(source)) {
-        throw new Error('Argument given must be of type Object');
+
+    dirty.setEncoding('utf8');
+    dirty.pipe(cleaner).pipe(clean);
+```
+
+
+By default `groundskeeper` removes all `console`, `debugger;` and pragmas that it founds, the following options allow you to specify what you want to __keep__:
+
+in Javascript:
+
+```javascript
+    {
+        console: true,                          // Keep console logs
+        debugger: true                          // Keep debugger; statements
+        pragmas: ['validation', 'development'], // Keep pragmas with the following identifiers
+        namespace: 'App.logger'                 // Besides console also remove functions in the given namespace,
+        replace: '0'                            // For the ones who don't know how to write Javascript...
     }
-    //</validation>
-
-    for (k in source) {
-        if (source.hasOwnProperty(k) && !target[k]) {
-            target[k] = source[k];
-        }
-    }
-
-    return target;
-}
 ```
 
-To remove the following block just type:
-```shell
-groundskeeper -p validation -i file.js -o output.js
-```
-
-- If you want to _not_ remove `console` statments:
+in Shell:
 
 ```shell
-groundskeeper -c false -i file.js -o output.js
+    -p, --pragmas <names>     comma-delimited <names> to keep, everything else is removed
+    -n, --namespace <string>  If you use your own logger utility, specify here, e.g.: `App.logger`
+    -d, --debugger [boolean]  If true, it will keep `debbuger;` statements
+    -c, --console [boolean]   If true, it keeps `console` statements
+    -r, --replace <string>    If given it will replace every console with the given value
 ```
 
+If you use your own logger utility, you can also remove those by specifying a namespace.
+Assuming your utility is `App.logger.log('yeyy')`
 
-Options
--------
+```shell
+    groundskeeper -n App.logger.log < dirty.js > clean.js
+```
+
+If you have multiple functions (warn, count...) in that namespace you can specify `App.logger` only to remove them all:
+
+```shell
+    groundskeeper -n App.logger < dirty.js > clean.js
+```
+
+__Note:__
+In certain cases, you can't remove the `console` entirely, a pretty tipical case of that is:
+
+```javascript
+    if (condition) console.log("condition true");
+    else console.log("condition false")
+
+    // yeah... most cases happen when people don't use brackets...
+```
+
+After removing the `console` statements the previous code becomes:
+
+```javascript
+    if (condition)
+    else
+```
+... which is illegal.
+
+That's when you should use the `replace` option by specifying a string, where the code becomes:
 
 ```
--h, --help               output usage information
--V, --version            output the version number
--i, --input <path>       input folder, defaults to current folder
--o, --output <path>      output folder, defaults to ./clean
--c, --console [boolean]  enable the removal of console statements
--a, --ast [boolean]      disable parse through ast, fallbacks to regex but keeps
-newlines
--p, --pragmas <names>    comma-delimited <names> to remove, defaults to validation, development
--v, --verbose [boolean]  outputs current state of procedure
---list                   display list of console methods that will be removed
+    // assuming 'replace' = '0'
+    if (condition) '0'
+    else '0'
 ```
+... which is harmless, not pretty, but harmless.
+
 
 Tests
 -----

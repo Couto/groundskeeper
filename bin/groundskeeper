@@ -10,13 +10,13 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.0.6
+ * @version 0.1.0
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
  *
  * @example
- * $ groundskeeper -d true -n App.logger -p validation,development -i ./src -o ./dist
+ * $ groundskeeper -r 0 -dc true -n App.logger -p validation,development
  */
 
 // Dependencies
@@ -25,67 +25,33 @@ var fs = require('fs'),
     colors = require('colors'),
     groundskeeper = require('../index'),
     // Variables
-    options = {};
+    buf = '';
 
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
     .version("0.1.0")
-    .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
-    .option('-i, --input <path>',       'input folder, ' + 'folder or glob to read files' + ' defaults to stdin'.grey)
-    .option('-o, --output <path>',      'output folder, ' + 'folder/file where cleaned files will be placed ' + 'defaults to stdout'.grey)
+    .usage(' -c [false] -p validation,test,development')
     .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
-    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger` ' + 'defaults to `console`'.grey)
+    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger`')
     .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
     .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
-    .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
-    .option('--list',                   'display list of console methods that will be removed');
+    .option('-r, --replace <string>',   'If given it will replace every console with the given value')
+    .option('-v, --verbose [boolean]',  'outputs current state of procedure', false);
 
 program.name = 'groundskeeper';
-
-// --list
-program.on('list', function () {
-    console.log();
-    console.log('   assert '.bold + '            console.assert(undefined === true)'.grey);
-    console.log('   clear '.bold + '             console.clear()'.grey);
-    console.log('   count '.bold + '             console.count("hard loop")'.grey);
-    console.log('   debug '.bold + '             console.debug(String)'.grey);
-    console.log('   dir '.bold + '               console.dir(Object)'.grey);
-    console.log('   dirxml '.bold + '            console.dirxml(document.body)'.grey);
-    console.log('   error '.bold + '             console.error("Argument not given")'.grey);
-    console.log('   group '.bold + '             console.group("groupName")'.grey);
-    console.log('   groupCollapsed '.bold + '    console.groupCollapsed("collapsedGroupName")'.grey);
-    console.log('   groupEnd '.bold + '          console.groupEnd("groupName")'.grey);
-    console.log('   info '.bold + '              console.info(variableName)'.grey);
-    console.log('   log '.bold + '               console.log()'.grey);
-    console.log('   markTimeline '.bold + '      console.markTimeline("string")'.grey);
-    console.log('   profile '.bold + '           console.profile("profileName")'.grey);
-    console.log('   profileEnd '.bold + '        console.profileEnd("profileName")'.grey);
-    console.log('   time '.bold + '              console.time("forEach loop")'.grey);
-    console.log('   timeEnd '.bold + '           console.timeEnd("forEach loop")'.grey);
-    console.log('   trace '.bold + '             console.trace()'.grey);
-    console.log('   warn '.bold + '              console.warn("exception found")'.grey);
-    console.log();
-    process.exit();
-});
 
 program.parse(process.argv);
 
 // --pragmas
 if (program.pragmas) {
-    program.pragmas = [].concat(program.pragmas.split(/ *, */));
-    console.log(program.pragmas)
+    program.pragmas = program.pragmas.split(/ *, */);
 }
 
-var input;
-
-if (program.input) {
-    console.log(program.input)
-    input = fs.createReadStream(program.input);
-} else {
-    input = process.stdin;
-}
-
-var cleaner = groundskeeper(program);
-input.setEncoding('utf8');
-input.pipe(cleaner).pipe(process.stdout);
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function (chunk) { buf += chunk; });
+process.stdin.on('end', function () {
+    cleaner = groundskeeper(program);
+    cleaner.write(buf);
+    process.stdout.write(cleaner.toString());
+}).resume();

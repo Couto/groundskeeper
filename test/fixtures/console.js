@@ -9,10 +9,18 @@ function merge(target) {
         keys.forEach(function (val) {
             target[val] = objects[idx][val];
             console.log(keys);
+            debugger;
+            //<development>
+            clean('this').pragma
+            //</development>
         });
     });
 
     console.log('all duplicates, get more');
     console.log("loadImageInCache():::::", index+1, index+1 % 2);
     console.log("external() open()", url, scrollee);
+
+    //<validation>
+    clean('this').pragma
+    //</validation>
 }

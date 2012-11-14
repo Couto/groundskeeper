@@ -20,7 +20,8 @@
  */
 
 // Dependencies
-var program = require('commander'),
+var fs = require('fs'),
+    program = require('commander'),
     colors = require('colors'),
     groundskeeper = require('../index'),
     // Variables
@@ -29,12 +30,12 @@ var program = require('commander'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.0.6")
+    .version("0.1.0")
     .usage(' -i <path> -o <path> -c [false] -p validation,test,development')
     .option('-i, --input <path>',       'input folder, ' + 'folder or glob to read files' + ' defaults to stdin'.grey)
     .option('-o, --output <path>',      'output folder, ' + 'folder/file where cleaned files will be placed ' + 'defaults to stdout'.grey)
-    .option('-p, --pragmas <names>',    'comma-delimited <names> to remove, ' + 'defaults to validation, development'.grey, 'validation, development')
-    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger` ' + 'defaults to `console`'.grey) 
+    .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
+    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger` ' + 'defaults to `console`'.grey)
     .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
     .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false)
@@ -73,6 +74,18 @@ program.parse(process.argv);
 // --pragmas
 if (program.pragmas) {
     program.pragmas = [].concat(program.pragmas.split(/ *, */));
+    console.log(program.pragmas)
 }
 
-groundskeeper(program);
+var input;
+
+if (program.input) {
+    console.log(program.input)
+    input = fs.createReadStream(program.input);
+} else {
+    input = process.stdin;
+}
+
+var cleaner = groundskeeper(program);
+input.setEncoding('utf8');
+input.pipe(cleaner).pipe(process.stdout);

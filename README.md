@@ -3,6 +3,8 @@ groundskeeper
 
 __Current Version:__ 0.1.0
 
+[![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=dev)](https://travis-ci.org/Couto/groundskeeper)
+
 This is a small utility to remove forgotten `consoles` and specific blocks of code from Javascript files.
 
 It just happens that I forget __a lot__ to remove `console` statements when moving code to production... at the same time I like to do a lot of validations while in development enviroment, validations that are not really needed when in production mode.

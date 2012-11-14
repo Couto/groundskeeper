@@ -20,7 +20,7 @@ Instalation
 The easiest way is to use [npm](https://github.com/isaacs/npm)
 
 ```shell
-    npm install groundskeeper -g
+npm install groundskeeper -g
 ```
 
 Usage
@@ -29,32 +29,31 @@ Usage
 Pretty simple... dirty file goes in, clean file goes out:
 
 ```shell
-    groundskeeper < dirty.js > clean.js
+groundskeeper < dirty.js > clean.js
 ```
 
 ```javascript
-    var fs = require('fs'),
-        groundskeeper = require('groundskeeper'),
-        file = fs.readFileSync('dirtyFile.js', 'utf8'),
-        cleaner = groundskeeper(options);
+var fs = require('fs'),
+    groundskeeper = require('groundskeeper'),
+    file = fs.readFileSync('dirtyFile.js', 'utf8'),
+    cleaner = groundskeeper(options);
 
-    cleaner.write(file);
-    fs.writeFileSync('cleanFile.js', cleaner.isString(), 'utf8');
-
+cleaner.write(file);
+fs.writeFileSync('cleanFile.js', cleaner.isString(), 'utf8');
 ```
 
 Streams are supported by groundskeeper, but not by [esprima](http://code.google.com/p/esprima/issues/detail?id=92&q=Enhancement), if you really want to use Streams, make sure that your files are below 40960 bytes... still the example:
 
 ```javascript
-    var fs = require('fs'),
-        groundskeeper = require('groundskeeper'),
-        dirty = fs.createReadStream('dirty.js'),
-        clean = fs.createWriteStream('clean.js'),
-        cleaner = groundskeeper(options),
+var fs = require('fs'),
+    groundskeeper = require('groundskeeper'),
+    dirty = fs.createReadStream('dirty.js'),
+    clean = fs.createWriteStream('clean.js'),
+    cleaner = groundskeeper(options),
 
 
-    dirty.setEncoding('utf8');
-    dirty.pipe(cleaner).pipe(clean);
+dirty.setEncoding('utf8');
+dirty.pipe(cleaner).pipe(clean);
 ```
 
 
@@ -63,62 +62,62 @@ By default `groundskeeper` removes all `console`, `debugger;` and pragmas that i
 in Javascript:
 
 ```javascript
-    {
-        console: true,                          // Keep console logs
-        debugger: true                          // Keep debugger; statements
-        pragmas: ['validation', 'development'], // Keep pragmas with the following identifiers
-        namespace: 'App.logger'                 // Besides console also remove functions in the given namespace,
-        replace: '0'                            // For the ones who don't know how to write Javascript...
-    }
+{
+    console: true,                          // Keep console logs
+    debugger: true                          // Keep debugger; statements
+    pragmas: ['validation', 'development'], // Keep pragmas with the following identifiers
+    namespace: 'App.logger'                 // Besides console also remove functions in the given namespace,
+    replace: '0'                            // For the ones who don't know how to write Javascript...
+}
 ```
 
 in Shell:
 
 ```shell
-    -p, --pragmas <names>     comma-delimited <names> to keep, everything else is removed
-    -n, --namespace <string>  If you use your own logger utility, specify here, e.g.: `App.logger`
-    -d, --debugger [boolean]  If true, it will keep `debbuger;` statements
-    -c, --console [boolean]   If true, it keeps `console` statements
-    -r, --replace <string>    If given it will replace every console with the given value
+-p, --pragmas <names>     comma-delimited <names> to keep, everything else is removed
+-n, --namespace <string>  If you use your own logger utility, specify here, e.g.: `App.logger`
+-d, --debugger [boolean]  If true, it will keep `debbuger;` statements
+-c, --console [boolean]   If true, it keeps `console` statements
+-r, --replace <string>    If given it will replace every console with the given value
 ```
 
 If you use your own logger utility, you can also remove those by specifying a namespace.
 Assuming your utility is `App.logger.log('yeyy')`
 
 ```shell
-    groundskeeper -n App.logger.log < dirty.js > clean.js
+groundskeeper -n App.logger.log < dirty.js > clean.js
 ```
 
 If you have multiple functions (warn, count...) in that namespace you can specify `App.logger` only to remove them all:
 
 ```shell
-    groundskeeper -n App.logger < dirty.js > clean.js
+groundskeeper -n App.logger < dirty.js > clean.js
 ```
 
 __Note:__
 In certain cases, you can't remove the `console` entirely, a pretty tipical case of that is:
 
 ```javascript
-    if (condition) console.log("condition true");
-    else console.log("condition false")
+if (condition) console.log("condition true");
+else console.log("condition false")
 
-    // yeah... most cases happen when people don't use brackets...
+// yeah... most cases happen when people don't use brackets...
 ```
 
 After removing the `console` statements the previous code becomes:
 
 ```javascript
-    if (condition)
-    else
+if (condition)
+else
 ```
 ... which is illegal.
 
 That's when you should use the `replace` option by specifying a string, where the code becomes:
 
 ```
-    // assuming 'replace' = '0'
-    if (condition) '0'
-    else '0'
+// assuming 'replace' = '0'
+if (condition) '0'
+else '0'
 ```
 ... which is harmless, not pretty, but harmless.
 

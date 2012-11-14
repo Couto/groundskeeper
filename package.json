@@ -15,7 +15,10 @@
     "colors": "~0.6.0-1",
     "commander": "~1.0.5",
     "winston": "~0.6.2",
-    "glob": "~3.1.14"
+    "glob": "~3.1.14",
+    "should": "~1.2.1",
+    "cdir": "~0.1.2",
+    "mocha": "~1.7.0"
   },
   "devDependencies": {
     "should": "~1.2.1",

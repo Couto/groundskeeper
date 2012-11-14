@@ -1,1 +1,0 @@
-function merge(c){var b=Array.prototype.slice.call(arguments,1),a=[];b.forEach(function(e,d){a=Object.keys(e);a.forEach(function(f){c[f]=b[d][f];});});}

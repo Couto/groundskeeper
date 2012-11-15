@@ -8,10 +8,11 @@ function merge(target) {
         keys = Object.keys(val);
         keys.forEach(function (val) {
             target[val] = objects[idx][val];
+            App.logger.warn("Hello World");
             console.log(keys);
             debugger;
             //<development>
-            clean('this').pragma
+            clean('this').pragma;
             //</development>
         });
     });
@@ -23,6 +24,6 @@ function merge(target) {
     console.log("external() open()", url, scrollee);
 
     //<validation>
-    clean('this').pragma
+    clean('this').pragma;
     //</validation>
 }

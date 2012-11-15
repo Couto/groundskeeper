@@ -1,6 +1,6 @@
 module.exports = (!process.env.GROUNDSKEEPER_COVERAGE) ?
         require('./lib/groundskeeper') :
-        require('./lib-cov/groundskeeper');
+        require('./coverage/groundskeeper');
 
 /**
  *                              `,:,`

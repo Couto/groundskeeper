@@ -18,7 +18,7 @@ test-watch:
 
 test-cov:
 	@$(MAKE) lib-cov
-	@NODE_ENV=COVERAGE ./node_modules/.bin/mocha \
+	@GROUNDSKEEPER_COVERAGE=1 ./node_modules/.bin/mocha \
 		--ui exports \
 		--reporter html-cov \
 		$(TESTS) > ./coverage/index.html \

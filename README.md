@@ -5,7 +5,7 @@ __Current Version:__ 0.1.0
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=dev)](https://travis-ci.org/Couto/groundskeeper)
 
-This is a small utility to remove forgotten `consoles` and specific blocks of code from Javascript files.
+This is a small utility to remove forgotten `console`, `debugger` and specific blocks of code from Javascript files.
 
 It just happens that I forget __a lot__ to remove `console` statements when moving code to production... at the same time I like to do a lot of validations while in development enviroment, validations that are not really needed when in production mode.
 
@@ -30,10 +30,12 @@ Usage
 
 Pretty simple... dirty file goes in, clean file goes out:
 
+in shell:
 ```shell
 groundskeeper < dirty.js > clean.js
 ```
 
+in javascript:
 ```javascript
 var fs = require('fs'),
     groundskeeper = require('groundskeeper'),
@@ -44,7 +46,7 @@ cleaner.write(file);
 fs.writeFileSync('cleanFile.js', cleaner.isString(), 'utf8');
 ```
 
-Streams are supported by groundskeeper, but not by [esprima](http://code.google.com/p/esprima/issues/detail?id=92&q=Enhancement), if you really want to use Streams, make sure that your files are below 40960 bytes... still the example:
+Streams are supported by groundskeeper, but not by [esprima](http://code.google.com/p/esprima/issues/detail?id=92&q=Enhancement), if you really want to use Streams, make sure that your files are below 40960 bytes, still... the example:
 
 ```javascript
 var fs = require('fs'),
@@ -123,6 +125,25 @@ else '0'
 ```
 ... which is harmless, not pretty, but harmless.
 
+
+__Pragmas__
+
+If you're wondering how to remove entire blocks of code, you can do that by using comments.
+
+```javascript
+var clone = function (arr) {
+
+    //<validation>
+    if (Object.prototype.toString.call(arr) !== '[object Array]') {
+        throw new Error('Invalid argument given');
+    }
+    //</validation>
+
+    return arr.map(function (val) {});
+};
+```
+
+Notice those comments? They specify a block code of validation, you can specify whatever name you wish, as long as you respect the format.
 
 Tests
 -----

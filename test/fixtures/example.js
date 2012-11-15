@@ -12,7 +12,7 @@ function merge(target) {
             console.log(keys);
             debugger;
             //<development>
-            clean('this').pragma;
+            clean('this').developmentPragma;
             //</development>
         });
     });
@@ -24,6 +24,6 @@ function merge(target) {
     console.log("external() open()", url, scrollee);
 
     //<validation>
-    clean('this').pragma;
+    clean('this').validationPragma;
     //</validation>
 }

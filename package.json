@@ -1,7 +1,7 @@
 {
   "name": "groundskeeper",
   "description": "Pragmas and console statements remover",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Luis Couto <couto@15minuteslate.net> (15minuteslate.net)",
   "repository": {
     "type": "git",
@@ -14,7 +14,9 @@
     "falafel": "~0.1.4",
     "colors": "~0.6.0-1",
     "commander": "~1.0.5",
-    "esprima": "~1.0.2"
+    "esprima": "~1.0.2",
+    "cdir": "~0.1.2",
+    "mocha": "~1.7.0"
   },
   "devDependencies": {
     "cdir": "~0.1.2",
@@ -24,6 +26,6 @@
     "node": ">=0.8"
   },
   "scripts": {
-    "test" : "mocha --ui exports --reporter tap"
+    "test": "mocha --ui exports --reporter tap"
   }
 }

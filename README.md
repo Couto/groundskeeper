@@ -1,7 +1,7 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.0
+__Current Version:__ 0.1.1
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=dev)](https://travis-ci.org/Couto/groundskeeper)
 

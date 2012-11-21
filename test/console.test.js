@@ -11,8 +11,8 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove console statements': function () {
-        var file = fixture('console/example'),
-            clean = fixture('console/example.clean'),
+        var file = fixture('console/console'),
+            clean = fixture('console/console.clean'),
             cleaner = groundskeeper({
                 debugger: true,
                 pragmas: ['validation', 'development']
@@ -23,8 +23,8 @@ module.exports = {
     },
 
     'remove console statements minified': function () {
-        var file = fixture('console/example.min'),
-            clean = fixture('console/example.min.clean'),
+        var file = fixture('console/console.min'),
+            clean = fixture('console/console.min.clean'),
             cleaner = groundskeeper({
                 debugger: true,
                 pragmas: ['validation', 'development']

@@ -12,7 +12,7 @@ function merge(target) {
             'DEBUGGER;'
             console.log(keys);
             debugger;
-            
+
             //<development>
             clean('this').developmentPragma;
             //</development>

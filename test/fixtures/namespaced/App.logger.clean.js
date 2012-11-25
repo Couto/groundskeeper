@@ -1,5 +1,5 @@
 function merge(target) {
-    'debugger';
+    console.dir(target, arguments);
 
     var objects = Array.prototype.slice.call(arguments, 1),
         keys = [],
@@ -9,19 +9,16 @@ function merge(target) {
         keys = Object.keys(val);
         keys.forEach(function (val) {
             target[val] = objects[idx][val];
-            'DEBUGGER;'
+            App.logger.warn("Hello World");
             console.log(keys);
-            
-
+            debugger;
             //<development>
             clean('this').developmentPragma;
             //</development>
         });
-        DEBUGGER
-        Debug.write('example');
     });
 
-    App.logger.log("Hello World");
+    
 
     console.log('all duplicates, get more');
     console.log("loadImageInCache():::::", index+1, index+1 % 2);
@@ -29,6 +26,5 @@ function merge(target) {
 
     //<validation>
     clean('this').validationPragma;
-    'Debugger';
     //</validation>
 }

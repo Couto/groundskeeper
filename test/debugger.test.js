@@ -11,8 +11,6 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove debugger statements': function () {
-        'use strict';
-
         var file = fixture('debugger/debugger'),
             clean = fixture('debugger/debugger.clean'),
             cleaner = groundskeeper({
@@ -21,6 +19,10 @@ module.exports = {
             });
 
         cleaner.write(file);
+
+        console.log(file, clean, cleaner.toString());
+        fs.writeFileSync(__dirname + '/../debugger.clean.js', cleaner.toString(), 'utf8');
         assert.equal(cleaner.toString(), clean);
     }
+
 };

@@ -11,46 +11,87 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove App.logger.log statements': function () {
-        var file = fixture('example'),
+        var file = fixture('namespaced/App.logger.log'),
+            clean = fixture('namespaced/App.logger.log.clean'),
             cleaner = groundskeeper({
-                namespace: 'App.logger.log'
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': 'App.logger.log'
             });
 
         cleaner.write(file);
-        assert.equal(cleaner.toString().indexOf('App.logger.log'), -1);
-        assert.notEqual(cleaner.toString().indexOf('App.logger.warn'), -1);
+        console.log(cleaner.toString())
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove App.logger statements': function () {
-        var file = fixture('example'),
+        var file = fixture('namespaced/'),
+            clean = fixture('namespaced/'),
             cleaner = groundskeeper({
-                namespace: 'App.logger'
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': 'App.logger'
             });
 
         cleaner.write(file);
-        assert.equal(cleaner.toString().indexOf('App.logger'), -1);
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove App.logger.log statements minified': function () {
-        var file = fixture('example.min'),
+        var file = fixture('namespaced/'),
+            clean = fixture('namespaced/'),
             cleaner = groundskeeper({
-                namespace: 'App.logger.log'
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': 'App.logger.log'
             });
 
         cleaner.write(file);
-
-        assert.equal(cleaner.toString().indexOf('App.logger.log'), -1);
-        assert.notEqual(cleaner.toString().indexOf('App.logger.warn'), -1);
-
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove App.logger statements minified': function () {
-        var file = fixture('example.min'),
+        var file = fixture('namespaced/'),
+            clean = fixture('namespaced/'),
             cleaner = groundskeeper({
-                namespace: 'App.logger'
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': 'App.log'
             });
 
         cleaner.write(file);
-        assert.equal(cleaner.toString().indexOf('App.logger'), -1);
+        assert.equal(cleaner.toString(), clean);
+    },
+
+    'remove array of namespaces': function () {
+        var file = fixture('namespaced/'),
+            clean = fixture('namespaced/'),
+            cleaner = groundskeeper({
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': ['Sushi.log', 'Sushi.warn', 'Sushi.error']
+            });
+
+        cleaner.write(file);
+        assert.equal(cleaner.toString(), clean);
+    },
+
+    'remove array of namespaces minified': function () {
+        var file = fixture('namespaced/'),
+            clean = fixture('namespaced/'),
+            cleaner = groundskeeper({
+                'console': true,
+                'pragmas': ['validation', 'development'],
+                'debugger': true,
+                'namespace': ['Sushi.log', 'Sushi.warn', 'Sushi.error']
+            });
+
+        cleaner.write(file);
+        assert.equal(cleaner.toString(), clean);
     }
 };

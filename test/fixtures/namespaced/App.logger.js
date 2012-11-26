@@ -9,7 +9,7 @@ function merge(target) {
         keys = Object.keys(val);
         keys.forEach(function (val) {
             target[val] = objects[idx][val];
-            
+            App.logger.warn("Hello World");
             console.log(keys);
             debugger;
             //<development>
@@ -18,7 +18,7 @@ function merge(target) {
         });
     });
 
-    
+    App.logger.log("Hello World");
 
     console.log('all duplicates, get more');
     console.log("loadImageInCache():::::", index+1, index+1 % 2);

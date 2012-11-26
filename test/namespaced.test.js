@@ -21,13 +21,13 @@ module.exports = {
             });
 
         cleaner.write(file);
-        console.log(cleaner.toString())
+
         assert.equal(cleaner.toString(), clean);
     },
 
     'remove App.logger statements': function () {
-        var file = fixture('namespaced/'),
-            clean = fixture('namespaced/'),
+        var file = fixture('namespaced/App.logger'),
+            clean = fixture('namespaced/App.logger.clean'),
             cleaner = groundskeeper({
                 'console': true,
                 'pragmas': ['validation', 'development'],
@@ -40,8 +40,8 @@ module.exports = {
     },
 
     'remove App.logger.log statements minified': function () {
-        var file = fixture('namespaced/'),
-            clean = fixture('namespaced/'),
+        var file = fixture('namespaced/App.logger.log.min'),
+            clean = fixture('namespaced/App.logger.log.min.clean'),
             cleaner = groundskeeper({
                 'console': true,
                 'pragmas': ['validation', 'development'],
@@ -54,13 +54,13 @@ module.exports = {
     },
 
     'remove App.logger statements minified': function () {
-        var file = fixture('namespaced/'),
-            clean = fixture('namespaced/'),
+        var file = fixture('namespaced/App.logger.min'),
+            clean = fixture('namespaced/App.logger.min.clean'),
             cleaner = groundskeeper({
                 'console': true,
                 'pragmas': ['validation', 'development'],
                 'debugger': true,
-                'namespace': 'App.log'
+                'namespace': 'App.logger'
             });
 
         cleaner.write(file);
@@ -68,8 +68,8 @@ module.exports = {
     },
 
     'remove array of namespaces': function () {
-        var file = fixture('namespaced/'),
-            clean = fixture('namespaced/'),
+        var file = fixture('namespaced/Sushi'),
+            clean = fixture('namespaced/Sushi.clean'),
             cleaner = groundskeeper({
                 'console': true,
                 'pragmas': ['validation', 'development'],
@@ -82,8 +82,8 @@ module.exports = {
     },
 
     'remove array of namespaces minified': function () {
-        var file = fixture('namespaced/'),
-            clean = fixture('namespaced/'),
+        var file = fixture('namespaced/Sushi.min'),
+            clean = fixture('namespaced/Sushi.min.clean'),
             cleaner = groundskeeper({
                 'console': true,
                 'pragmas': ['validation', 'development'],

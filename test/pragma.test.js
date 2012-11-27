@@ -11,36 +11,32 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove pragmas': function () {
-        var file = fixture('example'),
-            cleaner = groundskeeper();
-
-        cleaner.write(file);
-
-        assert.equal(cleaner.toString().indexOf('<validation>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').validationPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</validation>'), -1);
-
-        assert.equal(cleaner.toString().indexOf('<development>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').developmentPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</development>'), -1);
-
+        var file = fixture('pragmas/'),
+            clean = fixture('pragmas/'),
+            cleaner = groundskeeper({
+                console: true,
+                debugger: true,
+                pragmas: ['']
+            })
     },
 
-    'remove specified pragma only': function () {
-        var file = fixture('example'),
+    'remove validation pragma only': function () {
+        var file = fixture('pragmas/'),
+            clean = fixture('pragmas/'),
             cleaner = groundskeeper({
-                pragmas: ['validation'] //keep validation, remove development
-            });
+                console: true,
+                debugger: true,
+                pragmas: ['']
+            })
+    },
 
-        cleaner.write(file);
-
-        assert.notEqual(cleaner.toString().indexOf('<validation>'), -1);
-        assert.notEqual(cleaner.toString().indexOf('clean(\'this\').validationPragma;'), -1);
-        assert.notEqual(cleaner.toString().indexOf('</validation>'), -1);
-
-        assert.equal(cleaner.toString().indexOf('<development>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').developmentPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</development>'), -1);
-
+    'remove development pragma only': function () {
+        var file = fixture('pragmas/'),
+            clean = fixture('pragmas/'),
+            cleaner = groundskeeper({
+                console: true,
+                debugger: true,
+                pragmas: ['']
+            })
     }
 };

@@ -19,9 +19,6 @@ module.exports = {
             });
 
         cleaner.write(file);
-
-        console.log(file, clean, cleaner.toString());
-        fs.writeFileSync(__dirname + '/../debugger.clean.js', cleaner.toString(), 'utf8');
         assert.equal(cleaner.toString(), clean);
     }
 

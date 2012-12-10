@@ -12,7 +12,9 @@ function merge(target) {
             App.logger.warn("Hello World");
             console.log(keys);
             debugger;
-            
+            //<development>
+            clean('this').developmentPragma;
+            //</development>
         });
     });
 

@@ -11,32 +11,49 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove pragmas': function () {
-        var file = fixture('pragmas/'),
-            clean = fixture('pragmas/'),
+        var file = fixture('pragmas/pragmas'),
+            clean = fixture('pragmas/pragmas.clean'),
             cleaner = groundskeeper({
                 console: true,
-                debugger: true,
-                pragmas: ['']
-            })
+                'debugger': true
+            });
+
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove validation pragma only': function () {
-        var file = fixture('pragmas/'),
-            clean = fixture('pragmas/'),
+        var file = fixture('pragmas/validation'),
+            clean = fixture('pragmas/validation.clean'),
             cleaner = groundskeeper({
                 console: true,
-                debugger: true,
-                pragmas: ['']
-            })
+                'debugger': true,
+                pragmas: ['development']
+            });
+
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove development pragma only': function () {
-        var file = fixture('pragmas/'),
-            clean = fixture('pragmas/'),
+        var file = fixture('pragmas/development'),
+            clean = fixture('pragmas/development.clean'),
             cleaner = groundskeeper({
                 console: true,
-                debugger: true,
-                pragmas: ['']
-            })
+                'debugger': true,
+                pragmas: ['validation']
+            });
+
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
     }
 };

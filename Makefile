@@ -6,7 +6,7 @@ test:
 	@clear
 	@NODE_ENV=TESTS ./node_modules/.bin/mocha \
 		--ui exports \
-		--reporter nyan \
+		--reporter spec \
 		$(TESTS)
 
 test-watch:

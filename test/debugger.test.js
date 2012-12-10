@@ -18,7 +18,9 @@ module.exports = {
                 pragmas: ['validation', 'development']
             });
 
+        var start = +new Date();
         cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
         assert.equal(cleaner.toString(), clean);
     }
 

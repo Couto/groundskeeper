@@ -11,6 +11,8 @@ It just happens that I forget __a lot__ to remove `console` statements when movi
 
 This tool is exactly that tool that removes all those useless stuff.
 
+Note: if you have any problems, take a look at the dev branch, but remember that branch is like pretty much beta.
+
 Requirements
 ------------
  - [nodejs](https://github.com/joyent/node)

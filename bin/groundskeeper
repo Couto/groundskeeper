@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.1.0
+ * @version 0.1.1
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -30,10 +30,10 @@ var fs = require('fs'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.1.0")
+    .version("0.1.1")
     .usage(' -c [false] -p validation,test,development')
     .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
-    .option('-n, --namespace <string>', 'If you use your own logger utility, specify here, e.g.: `App.logger`')
+    .option('-n, --namespace <names>',  'If you use your own logger utility, specify here, e.g.: `App.logger`')
     .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
     .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
     .option('-r, --replace <string>',   'If given it will replace every console with the given value')
@@ -46,6 +46,11 @@ program.parse(process.argv);
 // --pragmas
 if (program.pragmas) {
     program.pragmas = program.pragmas.split(/ *, */);
+}
+
+// --namespace
+if (program.namespace) {
+    program.namespace = program.namespace.split(/ *, */);
 }
 
 process.stdin.setEncoding('utf8');

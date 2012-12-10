@@ -11,18 +11,30 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove console statements': function () {
-        var file = fixture('example'),
-            cleaner = groundskeeper();
+        var file = fixture('console/console'),
+            clean = fixture('console/console.clean'),
+            cleaner = groundskeeper({
+                debugger: true,
+                pragmas: ['validation', 'development']
+            });
 
+        var start = +new Date();
         cleaner.write(file);
-        assert.equal(cleaner.toString().indexOf('console'), -1);
+        console.log(+new Date() - start + ' ms');
+        assert.equal(cleaner.toString(), clean);
     },
 
     'remove console statements minified': function () {
-        var file = fixture('example.min'),
-            cleaner = groundskeeper();
+        var file = fixture('console/console.min'),
+            clean = fixture('console/console.min.clean'),
+            cleaner = groundskeeper({
+                debugger: true,
+                pragmas: ['validation', 'development']
+            });
 
+        var start = +new Date();
         cleaner.write(file);
-        assert.equal(cleaner.toString().indexOf('console'), -1);
+        console.log(+new Date() - start + ' ms');
+        assert.equal(cleaner.toString(), clean);
     }
 };

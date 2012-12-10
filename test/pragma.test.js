@@ -11,36 +11,49 @@ var groundskeeper = require('../'),
 
 module.exports = {
     'remove pragmas': function () {
-        var file = fixture('example'),
-            cleaner = groundskeeper();
-
-        cleaner.write(file);
-
-        assert.equal(cleaner.toString().indexOf('<validation>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').validationPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</validation>'), -1);
-
-        assert.equal(cleaner.toString().indexOf('<development>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').developmentPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</development>'), -1);
-
-    },
-
-    'remove specified pragma only': function () {
-        var file = fixture('example'),
+        var file = fixture('pragmas/pragmas'),
+            clean = fixture('pragmas/pragmas.clean'),
             cleaner = groundskeeper({
-                pragmas: ['validation'] //keep validation, remove development
+                console: true,
+                'debugger': true
             });
 
+        var start = +new Date();
         cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
 
-        assert.notEqual(cleaner.toString().indexOf('<validation>'), -1);
-        assert.notEqual(cleaner.toString().indexOf('clean(\'this\').validationPragma;'), -1);
-        assert.notEqual(cleaner.toString().indexOf('</validation>'), -1);
+        assert.equal(cleaner.toString(), clean);
+    },
 
-        assert.equal(cleaner.toString().indexOf('<development>'), -1);
-        assert.equal(cleaner.toString().indexOf('clean(\'this\').developmentPragma;'), -1);
-        assert.equal(cleaner.toString().indexOf('</development>'), -1);
+    'remove validation pragma only': function () {
+        var file = fixture('pragmas/validation'),
+            clean = fixture('pragmas/validation.clean'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true,
+                pragmas: ['development']
+            });
 
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
+    },
+
+    'remove development pragma only': function () {
+        var file = fixture('pragmas/development'),
+            clean = fixture('pragmas/development.clean'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true,
+                pragmas: ['validation']
+            });
+
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
     }
 };

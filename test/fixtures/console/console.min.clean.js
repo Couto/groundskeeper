@@ -1,0 +1,1 @@
+function merge(a){var b=Array.prototype.slice.call(arguments,1),c=[];console.log,b.forEach(function(d,e){c=Object.keys(d),c.forEach(function(d){a[d]=b[e][d],App.logger.warn("Hello World"),,clean("this").developmentPragma})}),App.logger.log("Hello World"),,,,clean("this").validationPragma}

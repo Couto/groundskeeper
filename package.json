@@ -27,5 +27,16 @@
   },
   "scripts": {
     "test": "mocha --ui exports --reporter tap"
-  }
+  },
+  "keywords": [
+    "console",
+    "log",
+    "logs",
+    "debugger",
+    "pragmas",
+    "remover",
+    "removal",
+    "clean",
+    "cleaner"
+  ]
 }

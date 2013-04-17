@@ -1,7 +1,7 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.1
+__Current Version:__ 0.1.2
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=master)](https://travis-ci.org/Couto/groundskeeper)
 
@@ -45,7 +45,7 @@ var fs = require('fs'),
     cleaner = groundskeeper(options);
 
 cleaner.write(file);
-fs.writeFileSync('cleanFile.js', cleaner.isString(), 'utf8');
+fs.writeFileSync('cleanFile.js', cleaner.toString(), 'utf8');
 ```
 
 Streams are supported by groundskeeper, but not by [esprima](http://code.google.com/p/esprima/issues/detail?id=92&q=Enhancement), if you really want to use Streams, make sure that your files are below 40960 bytes, still... the example:

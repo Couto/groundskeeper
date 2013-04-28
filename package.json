@@ -12,15 +12,14 @@
   },
   "dependencies": {
     "colors": "~0.6.0-1",
-    "commander": "~1.0.5",
     "esprima": "~1.0.2",
     "cdir": "~0.1.2",
-    "mocha": "~1.7.4",
-    "falafel": "~0.2.1"
+    "falafel": "~0.2.1",
+    "commander": "~1.1.1"
   },
   "devDependencies": {
     "cdir": "~0.1.2",
-    "mocha": "~1.7.0"
+    "mocha": "~1.9.0"
   },
   "engines": {
     "node": ">=0.8"

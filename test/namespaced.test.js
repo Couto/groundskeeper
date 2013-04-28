@@ -105,5 +105,18 @@ module.exports = {
         cleaner.write(file);
         console.log(+new Date() - start + ' ms');
         assert.equal(cleaner.toString(), clean);
+    },
+    'remove alert': function () {
+        var source = 'alert("something");',
+            clean = '',
+            cleaner = groundskeeper({
+                'namespace': ['alert']
+            });
+
+        var start = +new Date();
+        cleaner.write(source);
+        console.log(+new Date() - start + ' ms');
+        assert.equal(cleaner.toString(), clean);
+
     }
 };

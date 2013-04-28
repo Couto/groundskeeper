@@ -1,9 +1,10 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.2
+__Current Version:__ 0.1.3
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=master)](https://travis-ci.org/Couto/groundskeeper)
+[![Dependencies Status](https://david-dm.org/Couto/groundskeeper.png?branch=master)](https://david-dm.org/Couto/groundskeeper)
 
 This is a small utility to remove forgotten `console`, `debugger` and specific blocks of code from Javascript files.
 

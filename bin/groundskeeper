@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.1.1
+ * @version 0.1.4
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -30,7 +30,7 @@ var fs = require('fs'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.1.1")
+    .version("0.1.4")
     .usage(' -c [false] -p validation,test,development')
     .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
     .option('-n, --namespace <names>',  'If you use your own logger utility, specify here, e.g.: `App.logger`')

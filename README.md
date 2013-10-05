@@ -1,7 +1,7 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.4
+__Current Version:__ 0.1.5
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=master)](https://travis-ci.org/Couto/groundskeeper)
 [![Dependencies Status](https://david-dm.org/Couto/groundskeeper.png?branch=master)](https://david-dm.org/Couto/groundskeeper)
@@ -73,7 +73,7 @@ in Javascript:
     console: true,                          // Keep console logs
     debugger: true                          // Keep debugger; statements
     pragmas: ['validation', 'development'], // Keep pragmas with the following identifiers
-    namespace: 'App.logger'                 // Besides console also remove functions in the given namespace,
+    namespace: ['App.logger', 'App.bucket'] // Besides console also remove function calls in the given namespace,
     replace: '0'                            // For the ones who don't know how to write Javascript...
 }
 ```
@@ -82,7 +82,7 @@ in Shell:
 
 ```shell
 -p, --pragmas <names>     comma-delimited <names> to keep, everything else is removed
--n, --namespace <string>  If you use your own logger utility, specify here, e.g.: `App.logger`
+-n, --namespace <names>   comma-delimited <names> to remove, e.g.: `App.logger,App.bucket`
 -d, --debugger [boolean]  If true, it will keep `debbuger;` statements
 -c, --console [boolean]   If true, it keeps `console` statements
 -r, --replace <string>    If given it will replace every console with the given value
@@ -169,4 +169,4 @@ TODO
 
 License
 -------
-Copyright (c) 2012 Luís Couto Licensed under the [MIT License](http://couto.mit-license.org)
+Copyright (c) 2013 Luís Couto Licensed under the [MIT License](http://couto.mit-license.org)

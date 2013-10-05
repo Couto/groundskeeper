@@ -117,6 +117,16 @@ module.exports = {
         cleaner.write(source);
         console.log(+new Date() - start + ' ms');
         assert.equal(cleaner.toString(), clean);
+    },
 
+    'assignment': function () {
+        var source = fixture('namespaced/assignment'),
+            clean = fixture('namespaced/assignment.clean'),
+            cleaner = groundskeeper({
+                namespace: ['s5.Log']
+            });
+
+        cleaner.write(source);
+        assert.equal(cleaner.toString(), clean);
     }
 };

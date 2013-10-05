@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.1.4
+ * @version 0.1.5
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -20,9 +20,7 @@
  */
 
 // Dependencies
-var fs = require('fs'),
-    program = require('commander'),
-    colors = require('colors'),
+var program = require('commander'),
     groundskeeper = require('../index'),
     // Variables
     buf = '';
@@ -30,10 +28,10 @@ var fs = require('fs'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version("0.1.4")
+    .version('0.1.5')
     .usage(' -c [false] -p validation,test,development')
     .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
-    .option('-n, --namespace <names>',  'If you use your own logger utility, specify here, e.g.: `App.logger`')
+    .option('-n, --namespace <names>',  'comma-delimited <names> to remove, e.g.: `App.logger,App.bucket`')
     .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
     .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
     .option('-r, --replace <string>',   'If given it will replace every console with the given value')
@@ -56,7 +54,7 @@ if (program.namespace) {
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', function (chunk) { buf += chunk; });
 process.stdin.on('end', function () {
-    cleaner = groundskeeper(program);
+    var cleaner = groundskeeper(program);
     cleaner.write(buf);
     process.stdout.write(cleaner.toString());
 }).resume();

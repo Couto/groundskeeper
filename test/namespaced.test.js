@@ -128,5 +128,17 @@ module.exports = {
 
         cleaner.write(source);
         assert.equal(cleaner.toString(), clean);
+    },
+
+    'util.log.debug': function () {
+        var source = fixture('namespaced/util.log.debug'),
+            clean = fixture('namespaced/util.log.debug.clean'),
+            cleaner = groundskeeper({
+                namespace: ['util.log.debug'],
+                replace: "'0'"
+            });
+
+        cleaner.write(source);
+        assert.equal(cleaner.toString(), clean);
     }
 };

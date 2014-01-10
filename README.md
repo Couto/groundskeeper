@@ -1,7 +1,7 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.5
+__Current Version:__ 0.1.6
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=master)](https://travis-ci.org/Couto/groundskeeper)
 [![Dependencies Status](https://david-dm.org/Couto/groundskeeper.png?branch=master)](https://david-dm.org/Couto/groundskeeper)
@@ -169,4 +169,4 @@ TODO
 
 License
 -------
-Copyright (c) 2013 Luís Couto Licensed under the [MIT License](http://couto.mit-license.org)
+Copyright (c) 2014 Luís Couto Licensed under the [MIT License](http://couto.mit-license.org)

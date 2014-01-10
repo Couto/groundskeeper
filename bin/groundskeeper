@@ -10,7 +10,7 @@
  * @author Luis Couto
  * @organization 15minuteslate.net
  * @contact couto@15minuteslate.net
- * @version 0.1.5
+ * @version 0.1.6
  * @requires path, fs, exec, commander.js, colors, log.js
  * @license http://couto.mit-license.org MIT
  *
@@ -28,7 +28,7 @@ var program = require('commander'),
 // Options
 // .option(-shortcut, --name, "description", functionToParse, defaultValue)
 program
-    .version('0.1.5')
+    .version(require('../package.json').version)
     .usage(' -c [false] -p validation,test,development')
     .option('-p, --pragmas <names>',    'comma-delimited <names> to keep, everything else is removed')
     .option('-n, --namespace <names>',  'comma-delimited <names> to remove, e.g.: `App.logger,App.bucket`')

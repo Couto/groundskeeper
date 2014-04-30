@@ -119,6 +119,17 @@ module.exports = {
         assert.equal(cleaner.toString(), clean);
     },
 
+    'remove call groups': function () {
+        var source = fixture('namespaced/group'),
+            clean = fixture('namespaced/group.clean'),
+            cleaner = groundskeeper({
+                'namespace': ['Logger']
+            });
+
+        cleaner.write(source);
+        assert.equal(cleaner.toString(), clean);
+    },
+
     'assignment': function () {
         var source = fixture('namespaced/assignment'),
             clean = fixture('namespaced/assignment.clean'),

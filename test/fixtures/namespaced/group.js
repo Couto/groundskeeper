@@ -1,0 +1,10 @@
+a();
+Logger.log("Hello World").some().very().long().call;
+b();
+Logger.log("Hello World from out of space!").immediate();
+c();
+Logger.log("Hello World");
+d();
+ab(Logger.log().log());
+ab(Logger.log());
+2 && Logger.log();

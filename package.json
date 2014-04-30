@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "colors": "~0.6.0-1",
-    "esprima": "~1.0.2",
+    "esprima": "~1.2.0",
     "falafel": "~0.3.1",
-    "commander": "~2.1.0"
+    "commander": "~2.2.0"
   },
   "devDependencies": {
     "cdir": "~0.1.2",

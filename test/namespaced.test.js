@@ -130,6 +130,17 @@ module.exports = {
         assert.equal(cleaner.toString(), clean);
     },
 
+    'remove namespace definition': function () {
+        var source = fixture('namespaced/definition'),
+            clean = fixture('namespaced/definition.clean'),
+            cleaner = groundskeeper({
+                'namespace': ['Logger']
+            });
+
+        cleaner.write(source);
+        assert.equal(cleaner.toString(), clean);
+    },
+
     'assignment': function () {
         var source = fixture('namespaced/assignment'),
             clean = fixture('namespaced/assignment.clean'),

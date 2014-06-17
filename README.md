@@ -169,4 +169,4 @@ TODO
 
 License
 -------
-Copyright (c) 2014 Luís Couto Licensed under the [MIT License](http://couto.mit-license.org)
+Copyright (c) 2014 Luís Couto Licensed under the ISC License

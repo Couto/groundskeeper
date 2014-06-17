@@ -1,8 +1,9 @@
 {
   "name": "groundskeeper",
   "description": "Pragmas and console statements remover",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": "Luis Couto <couto@15minuteslate.net> (15minuteslate.net)",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/Couto/groundskeeper"

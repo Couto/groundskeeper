@@ -25,6 +25,21 @@ module.exports = {
         assert.equal(cleaner.toString(), clean);
     },
 
+    'remove pragmas that are in block comments': function () {
+        var file = fixture('pragmas/block-comment'),
+            clean = fixture('pragmas/block-comment.clean'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true
+            });
+
+        var start = +new Date();
+        cleaner.write(file);
+        console.log(+new Date() - start + ' ms');
+
+        assert.equal(cleaner.toString(), clean);
+    },
+
     'remove validation pragma only': function () {
         var file = fixture('pragmas/validation'),
             clean = fixture('pragmas/validation.clean'),

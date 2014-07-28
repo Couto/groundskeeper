@@ -35,6 +35,7 @@ program
     .option('-d, --debugger [boolean]', 'If true, it will keep `debbuger;` statements', false)
     .option('-c, --console [boolean]',  'If true, it keeps `console` statements', false)
     .option('-r, --replace <string>',   'If given it will replace every console with the given value')
+    .option('-y, --dry-run [boolean]',   'Don\'t write to output file')
     .option('-v, --verbose [boolean]',  'outputs current state of procedure', false);
 
 program.name = 'groundskeeper';

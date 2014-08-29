@@ -14,6 +14,14 @@ This tool is exactly that tool that removes all those useless stuff.
 
 Note: if you have any problems, take a look at the dev branch, but remember that branch is like pretty much beta.
 
+## Notice
+If you're using [UglifyJS2](https://github.com/mishoo/UglifyJS2) then you most likely don't need this package at all.
+You can just use the `drop_debugger` and `drop_console` to achieve the same effect.
+
+If you're using the pragmas function, you might achieve the same effect using [conditional compilation](https://github.com/mishoo/UglifyJS2#conditional-compilation).
+
+On the other hand if you don't use UglifyJS2 then go ahead and keep reading :)
+
 Requirements
 ------------
  - [nodejs](https://github.com/joyent/node)

@@ -20,9 +20,9 @@ module.exports = {
                 'namespace': 'App.logger.log'
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
 
         assert.equal(cleaner.toString(), clean);
     },
@@ -37,9 +37,9 @@ module.exports = {
                 'namespace': 'App.logger'
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -53,9 +53,9 @@ module.exports = {
                 'namespace': 'App.logger.log'
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -69,9 +69,9 @@ module.exports = {
                 'namespace': 'App.logger'
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -85,9 +85,9 @@ module.exports = {
                 'namespace': ['Sushi.log', 'Sushi.warn', 'Sushi.error']
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -101,9 +101,9 @@ module.exports = {
                 'namespace': ['Sushi.log', 'Sushi.warn', 'Sushi.error']
             });
 
-        var start = +new Date();
+
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
     'remove alert': function () {
@@ -113,9 +113,9 @@ module.exports = {
                 'namespace': ['alert']
             });
 
-        var start = +new Date();
+
         cleaner.write(source);
-        console.log(+new Date() - start + ' ms');
+
         assert.equal(cleaner.toString(), clean);
     },
 

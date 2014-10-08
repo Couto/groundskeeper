@@ -18,10 +18,7 @@ module.exports = {
                 'debugger': true
             });
 
-        var start = +new Date();
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
-
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -33,10 +30,7 @@ module.exports = {
                 'debugger': true
             });
 
-        var start = +new Date();
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
-
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -49,10 +43,7 @@ module.exports = {
                 pragmas: ['development']
             });
 
-        var start = +new Date();
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
-
         assert.equal(cleaner.toString(), clean);
     },
 
@@ -65,10 +56,19 @@ module.exports = {
                 pragmas: ['validation']
             });
 
-        var start = +new Date();
         cleaner.write(file);
-        console.log(+new Date() - start + ' ms');
+        assert.equal(cleaner.toString(), clean);
+    },
 
+    'remove pragma with non-alphanumeric characters in the name': function () {
+        var file = fixture('pragmas/non-alphanumeric'),
+            clean = fixture('pragmas/non-alphanumeric.clean'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true
+            });
+
+        cleaner.write(file);
         assert.equal(cleaner.toString(), clean);
     }
 };

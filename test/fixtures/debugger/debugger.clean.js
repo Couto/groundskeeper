@@ -17,6 +17,7 @@ function merge(target) {
             clean('this').developmentPragma;
             //</development>
         });
+        
         DEBUGGER
         Debug.write('example');
     });

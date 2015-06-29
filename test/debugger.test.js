@@ -19,6 +19,7 @@ module.exports = {
             });
 
         cleaner.write(file);
+
         assert.equal(cleaner.toString(), clean);
     }
 

@@ -1,7 +1,7 @@
 groundskeeper
 =============
 
-__Current Version:__ 0.1.12
+__Current Version:__ 0.2.00
 
 [![Build Status](https://secure.travis-ci.org/Couto/groundskeeper.png?branch=master)](https://travis-ci.org/Couto/groundskeeper)
 [![Dependencies Status](https://david-dm.org/Couto/groundskeeper.png?branch=master)](https://david-dm.org/Couto/groundskeeper)
@@ -155,6 +155,10 @@ var clone = function (arr) {
 ```
 
 Notice those comments? They specify a block code of validation, you can specify whatever name you wish, as long as you respect the format.
+
+Comment blocks can not be nested, and must be open/closed, similar to XML.
+
+Groundskeeper will throw an error if malformed pragmas are detected so you don't end up with unexpected output.
 
 Tests
 -----

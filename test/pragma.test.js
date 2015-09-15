@@ -70,5 +70,25 @@ module.exports = {
 
         cleaner.write(file);
         assert.equal(cleaner.toString(), clean);
+    },
+    'error on unmatched pragmas': function () {
+        var file = fixture('pragmas/unmatched'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true
+            });
+        assert.throws(
+            function(){ cleaner.write(file); },
+            function(err){return err.toString().indexOf('"unmatched" directive was encountered') !== -1;});
+    },
+    'error on trailing pragmas': function () {
+        var file = fixture('pragmas/trailing'),
+            cleaner = groundskeeper({
+                console: true,
+                'debugger': true
+            });
+        assert.throws(
+            function(){ cleaner.write(file); },
+            function(err){return err.toString().indexOf('Groundskeeper: encountered trailing pragma directive.') !== -1;});
     }
 };

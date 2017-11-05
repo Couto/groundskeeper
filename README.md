@@ -158,7 +158,7 @@ Notice those comments? They specify a block code of validation, you can specify 
 
 Tests
 -----
-Tests are ran using [mocha](http://visionmedia.github.com/mocha/) and [jscoverage](https://github.com/visionmedia/node-jscoverage) you can install mocha with `npm install`, but you'll need to clone and install jscoverage from this [repository](https://github.com/visionmedia/node-jscoverage)
+Tests are ran using [mocha](https://mochajs.org/) and [jscoverage](https://github.com/visionmedia/node-jscoverage) you can install mocha with `npm install`, but you'll need to clone and install jscoverage from this [repository](https://github.com/visionmedia/node-jscoverage)
 
 To issue the tests, take a look at the [Makefile](https://github.com/Couto/groundskeeper/blob/master/Makefile), but in short, it's just a matter of doing:
 

@@ -27,7 +27,7 @@ Requirements
  - [nodejs](https://github.com/joyent/node)
  - [npm](https://github.com/isaacs/npm) - If you're using a recent version of [nodejs](https://github.com/joyent/node/tree/v0.6.18) it should be already installed
 
-Instalation
+Installation
 -----------
 
 The easiest way is to use [npm](https://github.com/isaacs/npm)
